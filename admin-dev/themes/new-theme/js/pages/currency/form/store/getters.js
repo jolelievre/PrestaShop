@@ -1,4 +1,4 @@
-{#**
+/**
  * 2007-2019 PrestaShop SA and Contributors
  *
  * NOTICE OF LICENSE
@@ -21,19 +21,25 @@
  * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
- *#}
+ */
 
-{% extends '@PrestaShop/Admin/layout.html.twig' %}
-
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col">
-      {{ include('@PrestaShop/Admin/Improve/International/Currency/Blocks/form.html.twig', {'currencyForm': currencyForm, 'languages': languages}) }}
-    </div>
-  </div>
-{% endblock %}
-
-{% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('themes/new-theme/public/currency_form.bundle.js') }}"></script>
-{% endblock %}
+export default {
+  currencyData(state) {
+    return state.currencyData;
+  },
+  currencyIsoCode(state) {
+    return !state.currencyData ? '' : state.currencyData.iso_code;
+  },
+  languages(state) {
+    return state.languages;
+  },
+  languagesCount(state, getters) {
+    return getters.languages.length;
+  },
+  editedLanguage(state) {
+    return state.editedLanguage;
+  },
+  customData(state) {
+    return state.customData;
+  }
+};

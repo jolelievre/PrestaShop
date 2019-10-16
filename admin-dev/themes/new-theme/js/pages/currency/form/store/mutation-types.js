@@ -1,4 +1,4 @@
-{#**
+/**
  * 2007-2019 PrestaShop SA and Contributors
  *
  * NOTICE OF LICENSE
@@ -21,19 +21,15 @@
  * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
- *#}
+ */
 
-{% extends '@PrestaShop/Admin/layout.html.twig' %}
+export const RESET_LANGUAGE = 'RESET_LANGUAGE';
+export const CUSTOMIZE_CURRENCY_FORMAT = 'CUSTOMIZE_CURRENCY_FORMAT';
 
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col">
-      {{ include('@PrestaShop/Admin/Improve/International/Currency/Blocks/form.html.twig', {'currencyForm': currencyForm, 'languages': languages}) }}
-    </div>
-  </div>
-{% endblock %}
-
-{% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('themes/new-theme/public/currency_form.bundle.js') }}"></script>
-{% endblock %}
+export const SET_EDITED_LANGUAGE = 'SET_EDITED_LANGUAGE';
+export const SET_CURRENCY_DATA = 'SET_CURRENCY_DATA';
+export const SET_LANGUAGES = 'SET_LANGUAGES';
+export const SET_TRANSLATIONS = 'SET_TRANSLATIONS';
+export const SET_CUSTOM_SYMBOL = 'SET_CUSTOM_SYMBOL';
+export const SET_CUSTOM_TRANSFORMATION = 'SET_CUSTOM_TRANSFORMATION';
+export const SET_SHOW_CURRENCY_MODAL = 'SET_SHOW_CURRENCY_MODAL';

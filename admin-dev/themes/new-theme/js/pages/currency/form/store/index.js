@@ -1,4 +1,4 @@
-{#**
+/**
  * 2007-2019 PrestaShop SA and Contributors
  *
  * NOTICE OF LICENSE
@@ -21,19 +21,38 @@
  * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
- *#}
+ */
+import Vue from 'vue';
+import Vuex from 'vuex';
+import CurrencyActions from './actions';
+import mutations from './mutations';
+import getters from './getters';
 
-{% extends '@PrestaShop/Admin/layout.html.twig' %}
+Vue.use(Vuex);
 
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col">
-      {{ include('@PrestaShop/Admin/Improve/International/Currency/Blocks/form.html.twig', {'currencyForm': currencyForm, 'languages': languages}) }}
-    </div>
-  </div>
-{% endblock %}
+// root state object.
+const state = {
+  languages: [],
+  translations: {},
+  currencyData: null,
+  editedLanguage: {},
+  customData: {
+    symbol: '',
+    transformation: ''
+  },
+  showCurrencyModal: false
+};
 
-{% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('themes/new-theme/public/currency_form.bundle.js') }}"></script>
-{% endblock %}
+// A Vuex instance is created by combining the state, mutations, actions,
+// and getters.
+export default (referenceUrl) => {
+  const actions = new CurrencyActions(referenceUrl);
+
+  return new Vuex.Store({
+    state,
+    getters,
+    actions,
+    mutations,
+    strict: true
+  })
+};
