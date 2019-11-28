@@ -51,7 +51,7 @@ module.exports = {
     contacts: './js/pages/contacts',
     credit_slip: './js/pages/credit-slip',
     currency: './js/pages/currency',
-    currency_form: ['babel-polyfill', './js/pages/currency/form'],
+    currency_form: './js/pages/currency/form',
     customer: './js/pages/customer',
     customer_thread_view: './js/pages/customer-thread/view.js',
     email: './js/pages/email',
@@ -121,7 +121,11 @@ module.exports = {
           options: {
             presets: [
               ['es2015', {modules: false}],
+              ["env", {
+                "useBuiltIns": "usage"
+              }]
             ],
+            "plugins": ["transform-runtime"]
           },
         }],
       },

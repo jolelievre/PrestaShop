@@ -22,7 +22,6 @@
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
-
 import Vue from 'vue';
 import CurrencyFormatter from './components/CurrencyFormatter.vue';
 import CurrencyStore from './store';

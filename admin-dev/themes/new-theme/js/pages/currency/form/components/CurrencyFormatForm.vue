@@ -32,7 +32,7 @@
       <h4>{{trans('2. Choose format')}}</h4>
       <div class="row">
         <div class="ps-radio col-6" v-for="(pattern, transformation) in availableFormats" :key="transformation" :id="transformation">
-          <input type="radio" name="customPattern" :checked="transformation === customTransformation" :value="transformation" v-model="customTransformation" />
+          <input type="radio" :checked="transformation === customTransformation" :value="transformation" v-model="customTransformation" />
           <label :for="transformation" @click="customTransformation = transformation">
             {{ displayPattern(pattern) }}
           </label>
@@ -48,11 +48,6 @@
 
   export default {
     name: 'currency-format-form',
-    data() {
-      return {
-        currencyPattern: ''
-      }
-    },
     computed: {
       ...mapGetters([
         'editedLanguage',

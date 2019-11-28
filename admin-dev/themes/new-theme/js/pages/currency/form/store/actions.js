@@ -38,11 +38,11 @@ export default function(referenceUrl) {
       await currencyResource.get({id: currencyIsoCode}).then((response) => {
         currencyData = response.body;
       }, (errorResponse) => {
-        let errorMessage = 'Can not find CLDR data for currency ' + currencyIsoCode;
         if (errorResponse.body && errorResponse.body.error) {
-          errorMessage = errorResponse.body.error;
+          showGrowl('error', errorResponse.body.error, 3000);
+        } else {
+          showGrowl('error', 'Can not find CLDR data for currency ' + currencyIsoCode, 3000);
         }
-        showGrowl('error', errorMessage, 3000);
       });
     }
     if (currencyData && currencyData.transformations === undefined) {
