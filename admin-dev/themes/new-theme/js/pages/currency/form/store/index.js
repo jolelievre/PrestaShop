@@ -24,16 +24,17 @@
  */
 import Vue from 'vue';
 import Vuex from 'vuex';
+import VueI18n from 'vue-i18n';
 import CurrencyActions from './actions';
 import mutations from './mutations';
 import getters from './getters';
 
 Vue.use(Vuex);
+Vue.use(VueI18n);
 
 // root state object.
 const state = {
   languages: [],
-  translations: {},
   currencyData: null,
   editedLanguage: {},
   customData: {
@@ -45,11 +46,12 @@ const state = {
 
 // A Vuex instance is created by combining the state, mutations, actions,
 // and getters.
-export default (referenceUrl) => {
+export default (referenceUrl, initState) => {
   const actions = new CurrencyActions(referenceUrl);
+  initState = undefined === initState ? {} : initState;
 
   return new Vuex.Store({
-    state,
+    state: Object.assign(state, initState),
     getters,
     actions,
     mutations,

@@ -25,15 +25,15 @@
 <template>
   <div class="row">
     <div class="col-4">
-      <h4>{{trans('1. Enter symbol')}}</h4>
+      <h4>{{$t('1. Enter symbol')}}</h4>
       <input type="text" v-model="customSymbol">
     </div>
     <div class="col-8 border-left">
-      <h4>{{trans('2. Choose format')}}</h4>
+      <h4>{{$t('2. Choose format')}}</h4>
       <div class="row">
         <div class="ps-radio col-6" v-for="(pattern, transformation) in availableFormats" :key="transformation" :id="transformation">
           <input type="radio" :checked="transformation === customTransformation" :value="transformation" v-model="customTransformation" />
-          <label :for="transformation" @click="customTransformation = transformation">
+          <label @click="customTransformation = transformation">
             {{ displayPattern(pattern) }}
           </label>
         </div>

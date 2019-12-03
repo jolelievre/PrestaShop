@@ -28,19 +28,19 @@
     <thead class="thead-default">
     <tr class="column-headers">
       <th scope="col">
-        {{trans('Language')}}
+        {{$t('Language')}}
       </th>
       <th scope="col">
-        {{trans('Example')}}
+        {{$t('Example')}}
       </th>
       <th scope="col">
         <div class="text-right">
-          {{trans('Edit symbol / format')}}
+          {{$t('Edit symbol / format')}}
         </div>
       </th>
       <th scope="col">
         <div class="grid-actions-header-text">
-          {{trans('Reset settings')}}
+          {{$t('Reset settings')}}
         </div>
       </th>
     </tr>
@@ -101,7 +101,7 @@
       displayFormat(language) {
         const currencyFormatter = NumberFormatter.build(language.priceSpecification);
 
-        return this.trans('Price: %price% (Special discount %discount%)', {
+        return this.$t('Price: %price% (Special discount %discount%)', {
           '%price%': currencyFormatter.format(14251999.42),
           '%discount%': currencyFormatter.format(-566.268)
         });

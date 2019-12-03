@@ -23,12 +23,10 @@
  * International Registered Trademark & Property of PrestaShop SA
  */
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import CurrencyFormatter from './components/CurrencyFormatter.vue';
 import CurrencyStore from './store';
 import * as types from './store/mutation-types';
-import Translation from './mixins/translate';
-
-Vue.mixin(Translation);
 
 export default class CurrencyForm {
   /**
@@ -59,16 +57,18 @@ export default class CurrencyForm {
   }
 
   _initStore() {
-    this.store = new CurrencyStore(this.apiReferenceUrl);
+    this.store = new CurrencyStore(this.apiReferenceUrl, {
+      languages: this.languages,
+      translations: this.translations,
+      currencyData: this._getCurrencyDataFromForm()
+    });
+
     this.store.subscribe((mutation, state) => {
       if (types.CUSTOMIZE_CURRENCY_FORMAT === mutation.type ||
         types.RESET_LANGUAGE === mutation.type) {
         this._fillCurrencyCustomData(state.currencyData);
       }
     });
-    this.store.dispatch('setLanguages', this.languages);
-    this.store.dispatch('setTranslations', this.translations);
-    this.store.dispatch('setCurrencyData', this._getCurrencyDataFromForm());
   }
 
   _initCurrencyFormatter() {
@@ -77,17 +77,16 @@ export default class CurrencyForm {
       return;
     }
 
-    const currencyIsoCode = this.$isoCodeInput.val();
-    $(`<div class="card-block row" id="${this.currencyFormatterId}"></div>`).insertBefore(this.$currencyFormFooter);
+    $(`<div id="${this.currencyFormatterId}"></div>`).insertBefore(this.$currencyFormFooter);
     this.currencyFormatter = new Vue({
         el: this.map.currencyFormatter,
         store: this.store,
+        i18n: new VueI18n({
+          locale: 'en',
+          messages: { en: this.translations }
+        }),
         components: {CurrencyFormatter},
-        template: `
-      <div id="${this.currencyFormatterId}" class="card-block row">
-        <currency-formatter currency-iso-code="${currencyIsoCode}" display-class="col-sm"></currency-formatter>
-      </div>
-`
+        template: `<currency-formatter></currency-formatter>`
     });
   }
 

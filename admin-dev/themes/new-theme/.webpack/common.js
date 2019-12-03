@@ -109,6 +109,7 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.common.js',
       app: path.resolve(__dirname, '../js/app'),
+      psvue: path.resolve(__dirname, '../js/vue'),
     },
   },
   module: {

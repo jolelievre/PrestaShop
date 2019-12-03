@@ -23,87 +23,52 @@
  * International Registered Trademark & Property of PrestaShop SA
  *-->
 <template>
-  <div class="modal fade" id="ps-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{trans('Customize symbol and format')}} - {{ editedLanguage.name }}</h5>
-          <button type="button" class="close" data-dismiss="modal">
-            <i class="material-icons">close</i>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <currency-format-form v-if="showCustomizer"></currency-format-form>
-        </div>
-        <div class="modal-footer">
-          <PSButton @click="saveCustomCurrency" class="btn-lg" primary data-dismiss="modal">{{trans('Apply')}}</PSButton>
-          <PSButton @click="hideModal" class="btn-lg" ghost data-dismiss="modal">{{trans('Cancel')}}</PSButton>
-        </div>
-      </div>
-    </div>
-  </div>
+  <modal
+    confirmation
+    :modalTitle="modalTitle"
+    v-if="showCurrencyModal"
+    @close="closeModal"
+    @confirm="saveCustomCurrency"
+  >
+    <template slot="body">
+      <currency-format-form></currency-format-form>
+    </template>
+  </modal>
 </template>
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
-  import PSButton from 'app/widgets/ps-button';
   import CurrencyFormatForm from './CurrencyFormatForm';
+  import Modal from 'psvue/components/Modal';
 
   export default {
     name: 'currency-modal',
-    data() {
-      return {
-        showCustomizer: false
-      }
-    },
     components: {
       CurrencyFormatForm,
-      PSButton,
+      Modal,
     },
     computed: {
       ...mapGetters([
         'editedLanguage',
-        'customData',
         'showCurrencyModal'
-      ])
+      ]),
+      modalTitle() {
+        return this.$t('Customize symbol and format') + ' + ' + this.editedLanguage.name;
+      }
     },
     methods: {
       ...mapActions([
         'customizeCurrencyFormat',
         'setShowCurrencyModal'
       ]),
+      closeModal() {
+        console.log('closeModal');
+        this.setShowCurrencyModal(false);
+      },
       saveCustomCurrency() {
         this.customizeCurrencyFormat();
-        this.hideModal();
-      },
-      showModal() {
-        $(this.$el).modal('show');
-      },
-      hideModal() {
-        $(this.$el).modal('hide');
+        this.closeModal();
       }
-    },
-    mounted() {
-      // It's better to toggle customizer on modal event because it can be hidden by clicking out side of the modal
-      // And we use this boolean to force remount the CurrencyCustomizer and re-init the symbol
-      $(this.$el).on('show.bs.modal', () => {
-        this.showCustomizer = true;
-      });
-      $(this.$el).on('hidden.bs.modal', () => {
-        this.showCustomizer = false;
-        this.setShowCurrencyModal(false);
-      });
-    },
-    created() {
-      this.$store.watch(
-        (state, getters) => state.showCurrencyModal,
-        (newValue, oldValue) => {
-          if (newValue !== oldValue && newValue) {
-            this.showModal();
-          }
-        },
-      );
     },
   };
 </script>

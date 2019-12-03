@@ -24,13 +24,14 @@
 *-->
 
 <template>
-  <div :class="displayClass">
-    <language-list v-if="languagesCount"></language-list>
-    <div v-else>
-      {{trans('No information found for currency \'%isoCode%\'', {'%isoCode%': currencyIsoCode})}}
+  <div :id="id" class="card-block row">
+    <div class="col-sm">
+      <language-list v-if="languagesCount"></language-list>
+      <div v-else>
+        {{$t('No information found for currency \'%isoCode%\'', {'%isoCode%': currencyIsoCode})}}
+      </div>
+      <currency-modal></currency-modal>
     </div>
-
-    <currency-modal></currency-modal>
   </div>
 </template>
 
@@ -42,13 +43,11 @@
   export default {
     name: 'currency-formatter',
     props: {
-      displayClass: String,
-      currencyIsoCode: String
+      id: String
     },
     components: {LanguageList, CurrencyModal},
     computed: {
       ...mapGetters([
-        'isLoading',
         'languagesCount'
       ])
     }
