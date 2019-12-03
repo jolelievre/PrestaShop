@@ -63,7 +63,7 @@ export default function(referenceUrl) {
 
     editLanguageFormat: ({commit}, language) => {
       commit(types.SET_EDITED_LANGUAGE, language);
-      commit(types.SET_SHOW_CURRENCY_MODAL, true);
+      commit(types.SET_CURRENCY_MODAL_VISIBLE, true);
     },
     customizeCurrencyFormat: ({commit}) => {
       commit(types.CUSTOMIZE_CURRENCY_FORMAT);
@@ -76,6 +76,13 @@ export default function(referenceUrl) {
       state.languages.forEach((language) => {
         commit(types.RESET_LANGUAGE, { language });
       });
+    },
+
+    showCurrencyModal: ({commit}) => {
+      commit(types.SET_CURRENCY_MODAL_VISIBLE, true);
+    },
+    hideCurrencyModal: ({commit}) => {
+      commit(types.SET_CURRENCY_MODAL_VISIBLE, false);
     },
 
     setCurrencyData: ({commit}, currencyData) => {
@@ -93,9 +100,6 @@ export default function(referenceUrl) {
     setCustomTransformation: ({commit}, transformation) => {
       commit(types.SET_CUSTOM_TRANSFORMATION, transformation);
     },
-    setShowCurrencyModal: ({commit}, visible) => {
-      commit(types.SET_SHOW_CURRENCY_MODAL, visible);
-    }
   }
 }
 

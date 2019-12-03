@@ -24,20 +24,20 @@
  *-->
 <template>
   <div>
-    <transition name="modal-fade">
+    <transition name="fade">
       <div class="modal show">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content"
                aria-labelledby="modalTitle"
                aria-describedby="modalDescription"
-               v-click-outside="() => close()"
+               v-click-outside="close"
           >
             <header
               class="modal-header"
             >
               <slot name="header">
                 <h5 class="modal-title">{{ modalTitle }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.prevent.stop="close">
                   <span aria-hidden="true">×</span>
                 </button>
               </slot>
@@ -52,7 +52,7 @@
                 <button
                   type="button"
                   class="btn btn-outline-secondary"
-                  @click="close"
+                  @click.prevent.stop="close"
                   aria-label="Close modal"
                 >
                   {{ closeLabel }}
@@ -63,7 +63,7 @@
                 <button
                   type="button"
                   class="btn btn-outline-secondary"
-                  @click="close"
+                  @click.prevent.stop="close"
                   aria-label="Close modal"
                 >
                   {{ cancelLabel }}
@@ -72,7 +72,7 @@
                 <button
                   type="button"
                   class="btn btn-primary"
-                  @click="confirm"
+                  @click.prevent.stop="confirm"
                 >
                   {{ confirmLabel }}
                 </button>
@@ -82,7 +82,7 @@
         </div>
       </div>
     </transition>
-    <div class="modal-backdrop show" @click="close" />
+    <div class="modal-backdrop show" @click.prevent.stop="close" />
   </div>
 </template>
 
@@ -128,7 +128,6 @@
     },
     methods: {
       close() {
-        console.log('close');
         this.$emit('close');
       },
       confirm() {

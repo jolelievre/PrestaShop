@@ -27,6 +27,7 @@ import VueI18n from 'vue-i18n';
 import CurrencyFormatter from './components/CurrencyFormatter.vue';
 import CurrencyStore from './store';
 import * as types from './store/mutation-types';
+import ReplaceFormatter from '../../../vue/i18n/replace-formatter';
 
 export default class CurrencyForm {
   /**
@@ -83,6 +84,7 @@ export default class CurrencyForm {
         store: this.store,
         i18n: new VueI18n({
           locale: 'en',
+          formatter: new ReplaceFormatter(),
           messages: { en: this.translations }
         }),
         components: {CurrencyFormatter},

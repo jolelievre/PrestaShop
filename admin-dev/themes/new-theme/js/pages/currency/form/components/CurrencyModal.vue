@@ -26,7 +26,7 @@
   <modal
     confirmation
     :modalTitle="modalTitle"
-    v-if="showCurrencyModal"
+    v-if="currencyModalVisible"
     @close="closeModal"
     @confirm="saveCustomCurrency"
   >
@@ -50,7 +50,7 @@
     computed: {
       ...mapGetters([
         'editedLanguage',
-        'showCurrencyModal'
+        'currencyModalVisible'
       ]),
       modalTitle() {
         return this.$t('Customize symbol and format') + ' + ' + this.editedLanguage.name;
@@ -59,11 +59,10 @@
     methods: {
       ...mapActions([
         'customizeCurrencyFormat',
-        'setShowCurrencyModal'
+        'hideCurrencyModal'
       ]),
       closeModal() {
-        console.log('closeModal');
-        this.setShowCurrencyModal(false);
+        this.hideCurrencyModal();
       },
       saveCustomCurrency() {
         this.customizeCurrencyFormat();

@@ -27,7 +27,6 @@ import Vue from 'vue';
 let binded = [];
 
 function handler(e) {
-  console.log('handler', binded);
   binded.forEach((el) => {
     if (!el.node.contains(e.target)) {
       el.callback(e);
@@ -62,21 +61,18 @@ function removeListener(node, callback) {
 
 Vue.directive('click-outside', {
   bind(el, binding) {
-    console.log('bind');
     removeListener(el, binding.value);
     if (typeof binding.value === 'function') {
       addListener(el, binding.value);
     }
   },
   update(el, binding) {
-    console.log('update');
     if (binding.value !== binding.oldValue) {
       removeListener(el, binding.oldValue);
       addListener(el, binding.value);
     }
   },
   unbind(el, binding) {
-    console.log('unbind');
     removeListener(el, binding.value);
   },
 });

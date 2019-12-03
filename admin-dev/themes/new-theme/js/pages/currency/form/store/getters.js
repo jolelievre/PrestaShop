@@ -42,7 +42,7 @@ export default {
   customData(state) {
     return state.customData;
   },
-  showCurrencyModal(state) {
-    return state.showCurrencyModal;
+  currencyModalVisible(state) {
+    return state.currencyModalVisible;
   }
 };

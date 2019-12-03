@@ -33,7 +33,7 @@
       <div class="row">
         <div class="ps-radio col-6" v-for="(pattern, transformation) in availableFormats" :key="transformation" :id="transformation">
           <input type="radio" :checked="transformation === customTransformation" :value="transformation" v-model="customTransformation" />
-          <label @click="customTransformation = transformation">
+          <label @click.prevent.stop="customTransformation = transformation">
             {{ displayPattern(pattern) }}
           </label>
         </div>

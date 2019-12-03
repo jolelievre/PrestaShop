@@ -22,39 +22,26 @@
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VueI18n from 'vue-i18n';
-import CurrencyActions from './actions';
-import mutations from './mutations';
-import getters from './getters';
 
-Vue.use(Vuex);
-Vue.use(VueI18n);
+/**
+ * This formatter is used by VueI18n, the basic format for variables looks
+ * like 'Hi {name}' or 'Hi {0}' Sadly it doesn't match the PrestaShop usual
+ * placeholders format.
+ * So this custom formatter allows us to simple replace in order to use formats
+ * like 'Hi %name%' the parameters then should be an object like {'%name%': 'John'}
+ */
+export default class ReplaceFormatter {
+  /**
+   * @param message {string}
+   * @param values {object}
+   *
+   * @returns {array}
+   */
+  interpolate (message, values) {
+    for (let param in values) {
+      message = message.replace(param, values[param]);
+    }
 
-// root state object.
-const state = {
-  languages: [],
-  currencyData: null,
-  editedLanguage: {},
-  customData: {
-    symbol: '',
-    transformation: ''
-  },
-  currencyModalVisible: false
-};
-
-// A Vuex instance is created by combining the state, mutations, actions,
-// and getters.
-export default (referenceUrl, initState) => {
-  const actions = new CurrencyActions(referenceUrl);
-  initState = undefined === initState ? {} : initState;
-
-  return new Vuex.Store({
-    state: Object.assign(state, initState),
-    getters,
-    actions,
-    mutations,
-    strict: true
-  })
-};
+    return [message];
+  }
+}

@@ -68,7 +68,7 @@ export default {
   [types.SET_CUSTOM_TRANSFORMATION](state, transformation) {
     state.customData.transformation = transformation;
   },
-  [types.SET_SHOW_CURRENCY_MODAL](state, visible) {
-    state.showCurrencyModal = visible;
+  [types.SET_CURRENCY_MODAL_VISIBLE](state, visible) {
+    state.currencyModalVisible = visible;
   }
 }

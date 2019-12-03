@@ -56,7 +56,7 @@
       <td>
         <div class="btn-group-action text-right">
           <div class="btn-group">
-            <button type="button" class="btn" @click="editLanguageFormat(language)">
+            <button type="button" class="btn" @click.prevent.stop="editLanguageFormat(language)">
               <i class="material-icons">edit</i>
             </button>
           </div>
@@ -65,7 +65,7 @@
       <td>
         <div class="btn-group-action text-right">
           <div class="btn-group">
-            <button type="button" class="btn" @click="resetLanguage(language)">
+            <button type="button" class="btn" @click.prevent.stop="resetLanguage(language)">
               <i class="material-icons">refresh</i>
             </button>
           </div>
