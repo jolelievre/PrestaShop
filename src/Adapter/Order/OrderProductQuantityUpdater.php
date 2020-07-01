@@ -120,12 +120,20 @@ class OrderProductQuantityUpdater
         try {
             $oldQuantity = (int) $orderDetail->product_quantity;
 
-            $orderDetail->product_quantity = $newQuantity;
-            $orderDetail->reduction_percent = 0;
-            // update taxes
-            $orderDetail->updateTaxAmount($order);
+            // Perform deletion first, we don't want the OrderDetail to be saved with a quantity 0, this could lead to bugs
+            if (0 === $newQuantity) {
+                // Product deletion
+                $this->orderProductRemover->deleteProductFromOrder($order, $orderDetail, $oldQuantity);
 
-            $orderDetail->update();
+                $this->updateCustomizationOnProductDelete($order, $orderDetail, $oldQuantity);
+            } else {
+                $orderDetail->product_quantity = $newQuantity;
+                $orderDetail->reduction_percent = 0;
+                // update taxes
+                $orderDetail->updateTaxAmount($order);
+
+                $orderDetail->update();
+            }
 
             // Update quantity on the cart and stock
             $cart = $this->updateProductQuantity($cart, $order, $orderDetail, $oldQuantity, $newQuantity);
@@ -171,26 +179,19 @@ class OrderProductQuantityUpdater
             return $cart;
         }
 
-        if (0 === $newQuantity) {
-            // Product deletion
-            $this->orderProductRemover->deleteProductFromOrder($order, $orderDetail, $oldQuantity);
+        // Update product and customization in the cart
+        $updateQuantityResult = $cart->updateQty(
+            abs($deltaQuantity),
+            $orderDetail->product_id,
+            $orderDetail->product_attribute_id,
+            false,
+            $deltaQuantity > 0 ? 'down' : 'up'
+        );
 
-            $this->updateCustomizationOnProductDelete($order, $orderDetail, $oldQuantity);
-        } else {
-            // Update product and customization in the cart
-            $updateQuantityResult = $cart->updateQty(
-                abs($deltaQuantity),
-                $orderDetail->product_id,
-                $orderDetail->product_attribute_id,
-                false,
-                $deltaQuantity > 0 ? 'down' : 'up'
-            );
-
-            if (-1 === $updateQuantityResult) {
-                throw new \LogicException('Minimum quantity is not respected');
-            } elseif (true !== $updateQuantityResult) {
-                throw new \LogicException('Something went wrong');
-            }
+        if (-1 === $updateQuantityResult) {
+            throw new \LogicException('Minimum quantity is not respected');
+        } elseif (true !== $updateQuantityResult) {
+            throw new \LogicException('Something went wrong');
         }
 
         return $cart;
