@@ -543,7 +543,7 @@
       <trans-unit id="15d30198621ad33274fc94b08cff5009">
         <source>Could not delete #%i</source>
         <target>Could not delete #%i</target>
-        <note>Line: 170</note>
+        <note>Line: 171</note>
       </trans-unit>
     </body>
   </file>
@@ -552,17 +552,17 @@
       <trans-unit id="3535b3934d0e2d6e7759649d78c7da58">
         <source>Missing id_hook</source>
         <target>Missing id_hook</target>
-        <note>Line: 248</note>
+        <note>Line: 256</note>
       </trans-unit>
       <trans-unit id="36ccadce9e530e36cf265145bdba5c1c">
         <source>Missing block_name</source>
         <target>Missing block_name</target>
-        <note>Line: 256</note>
+        <note>Line: 264</note>
       </trans-unit>
       <trans-unit id="12f4f6b7d1d17838950e3c6107144f2a">
         <source>Missing block_name value for language %s</source>
         <target>Missing block_name value for language %s</target>
-        <note>Line: 264</note>
+        <note>Line: 272</note>
       </trans-unit>
       <trans-unit id="ba88eb1dd9466f0be32b7dc7a82297ad">
         <source>Missing %s value in custom [%s] for language %s</source>
@@ -572,7 +572,7 @@
       <trans-unit id="504ca7ea96dde692360e88a97e98fc91">
         <source>Missing %s value in custom[%s] for language %s</source>
         <target>Missing %s value in custom[%s] for language %s</target>
-        <note>Line: 286</note>
+        <note>Line: 294</note>
       </trans-unit>
     </body>
   </file>
