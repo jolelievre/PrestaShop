@@ -1,5 +1,11 @@
 default:
     suites:
+        contact:
+            paths:
+                - "%paths.base%/Features/Scenario/Contact"
+            contexts:
+                - Tests\Integration\Behaviour\Features\Context\CommonFeatureContext
+                - Tests\Integration\Behaviour\Features\Context\Domain\ContactFeatureContext
         database:
             paths:
                 - "%paths.base%/Features/Scenario/Database"
@@ -16,12 +22,13 @@ default:
                 - Tests\Integration\Behaviour\Features\Context\CommonFeatureContext
                 - Tests\Integration\Behaviour\Features\Context\StateFeatureContext
                 - Tests\Integration\Behaviour\Features\Context\Domain\StateFeatureContext
-        contact:
+        title:
             paths:
-                - "%paths.base%/Features/Scenario/Contact"
+                - "%paths.base%/Features/Scenario/Title"
             contexts:
                 - Tests\Integration\Behaviour\Features\Context\CommonFeatureContext
-                - Tests\Integration\Behaviour\Features\Context\Domain\ContactFeatureContext
+                - Tests\Integration\Behaviour\Features\Context\TitleFeatureContext
+                - Tests\Integration\Behaviour\Features\Context\Domain\TitleFeatureContext
         store:
             paths:
                 - "%paths.base%/Features/Scenario/Store"
@@ -416,3 +423,9 @@ default:
                 - Tests\Integration\Behaviour\Features\Context\LanguageFeatureContext
                 - Tests\Integration\Behaviour\Features\Context\Domain\ProfileFeatureContext
                 - Tests\Integration\Behaviour\Features\Context\Domain\PermissionFeatureContext
+        country:
+            paths:
+                - "%paths.base%/Features/Scenario/Country"
+            contexts:
+               - Tests\Integration\Behaviour\Features\Context\CommonFeatureContext
+               - Tests\Integration\Behaviour\Features\Context\Domain\CountryFeatureContext

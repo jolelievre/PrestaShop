@@ -65,6 +65,7 @@ module.exports = {
     customer_form: './js/pages/customer/form',
     customer_address_form: './js/pages/address/form',
     customer_outstanding: './js/pages/outstanding',
+    customer_preferences: './js/pages/customer-preferences',
     customer_thread_view: './js/pages/customer-thread/view',
     email: './js/pages/email',
     employee: './js/pages/employee/index',
@@ -104,6 +105,7 @@ module.exports = {
     order_view: './js/pages/order/view',
     orders: './scss/pages/orders/orders.scss',
     payment_preferences: './js/pages/payment-preferences',
+    performance_preferences: './js/pages/performance-preferences',
     permission: './js/pages/permission',
     permissions: './scss/pages/permissions/permissions.scss',
     product: './scss/pages/product/product_page.scss',
@@ -136,6 +138,7 @@ module.exports = {
     webservice: './js/pages/webservice',
     zone: './js/pages/zone',
     country: './js/pages/country',
+    country_form: './js/pages/country/form',
   },
   output: {
     path: path.resolve(__dirname, '../public'),

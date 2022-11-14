@@ -1357,6 +1357,7 @@ class FrontControllerCore extends Controller
             [
                 'controller' => $this,
                 'template_file' => $template,
+                'entity' => $params['entity'],
                 'id' => $params['id'],
                 'locale' => $locale,
             ]
@@ -1834,7 +1835,7 @@ class FrontControllerCore extends Controller
 
     protected function getCurrentURL()
     {
-        return Tools::getCurrentUrlProtocolPrefix() . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        return Tools::getCurrentUrl();
     }
 
     public function getPageName()

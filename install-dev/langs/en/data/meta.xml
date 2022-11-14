@@ -20,7 +20,7 @@
   </meta>
   <meta id="index" id_shop="1">
     <title/>
-    <description>Shop powered by PrestaShop</description>
+    <description></description>
     <keywords/>
     <url_rewrite/>
   </meta>
@@ -58,7 +58,7 @@
     <title>Suppliers</title>
     <description>Suppliers list</description>
     <keywords/>
-    <url_rewrite>supplier</url_rewrite>
+    <url_rewrite>suppliers</url_rewrite>
   </meta>
   <meta id="address" id_shop="1">
     <title>Address</title>

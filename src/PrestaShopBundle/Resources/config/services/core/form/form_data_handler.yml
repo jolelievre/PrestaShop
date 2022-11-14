@@ -223,6 +223,11 @@ services:
     arguments:
       - '@prestashop.core.command_bus'
 
+  prestashop.core.form.identifiable_object.data_handler.country_form_data_handler:
+    class: 'PrestaShop\PrestaShop\Core\Form\IdentifiableObject\DataHandler\CountryFormDataHandler'
+    arguments:
+      - '@prestashop.core.command_bus'
+
   prestashop.core.form.identifiable_object.data_handler.search_engine_form_data_handler:
     class: 'PrestaShop\PrestaShop\Core\Form\IdentifiableObject\DataHandler\SearchEngineFormDataHandler'
     arguments:
@@ -230,5 +235,10 @@ services:
 
   prestashop.core.form.identifiable_object.data_handler.specific_price_form_data_handler:
     class: 'PrestaShop\PrestaShop\Core\Form\IdentifiableObject\DataHandler\SpecificPriceFormDataHandler'
+    arguments:
+      - '@prestashop.core.command_bus'
+
+  prestashop.core.form.identifiable_object.data_handler.state_form_data_handler:
+    class: 'PrestaShop\PrestaShop\Core\Form\IdentifiableObject\DataHandler\StateFormDataHandler'
     arguments:
       - '@prestashop.core.command_bus'

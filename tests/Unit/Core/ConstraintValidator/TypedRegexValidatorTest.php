@@ -346,6 +346,40 @@ class TypedRegexValidatorTest extends ConstraintValidatorTestCase
         $this->assertViolationIsRaised(new TypedRegex(['type' => TypedRegex::TYPE_WEBSERVICE_KEY]), $invalidChar);
     }
 
+    public function testItSucceedsForZipCodeFormatTypeWhenValidCharactersGiven(): void
+    {
+        $this->validator->validate('LLLNNNNCCClllnnnccc-1234567890', new TypedRegex(['type' => TypedRegex::TYPE_WEBSERVICE_KEY]));
+
+        $this->assertNoViolation();
+    }
+
+    /**
+     * @dataProvider getInvalidZipCodeFormats
+     *
+     * @param string $invalidChar
+     */
+    public function testItFailsForZipCodeFormatTypeWhenInvalidCharactersGiven(string $invalidChar): void
+    {
+        $this->assertViolationIsRaised(new TypedRegex(['type' => TypedRegex::TYPE_ZIP_CODE_FORMAT]), $invalidChar);
+    }
+
+    public function testItSucceedsForStateIsoCodeTypeWhenValidCharactersGiven(): void
+    {
+        $this->validator->validate('FRA', new TypedRegex(['type' => TypedRegex::TYPE_STATE_ISO_CODE]));
+
+        $this->assertNoViolation();
+    }
+
+    /**
+     * @dataProvider getInvalidCharactersForStateIsoCode
+     *
+     * @param string $invalidChar
+     */
+    public function testItFailsForStateIsoCodeTypeWhenInvalidCharactersGiven(string $invalidChar): void
+    {
+        $this->assertViolationIsRaised(new TypedRegex(['type' => TypedRegex::TYPE_STATE_ISO_CODE]), $invalidChar);
+    }
+
     /**
      * @dataProvider getDataForLinkRewriteTest
      *
@@ -664,6 +698,42 @@ class TypedRegexValidatorTest extends ConstraintValidatorTestCase
         yield ['|'];
     }
 
+    public function getInvalidCharactersForStateIsoCode(): Generator
+    {
+        yield ['FRANC'];
+        yield ['~'];
+        yield ['ˇ'];
+        yield ['"'];
+        yield ['@'];
+        yield ['#'];
+        yield ['€'];
+        yield ['$'];
+        yield ['£'];
+        yield ['%'];
+        yield ['&'];
+        yield ['§'];
+        yield ['/'];
+        yield ['('];
+        yield [')'];
+        yield ['='];
+        yield ['?'];
+        yield ['`'];
+        yield ['\\'];
+        yield ['}'];
+        yield [']'];
+        yield ['['];
+        yield ['{'];
+        yield ["'"];
+        yield ['*'];
+        yield ['.'];
+        yield [','];
+        yield [':'];
+        yield [';'];
+        yield ['<'];
+        yield ['>'];
+        yield ['|'];
+    }
+
     /**
      * @return Generator
      */
@@ -698,6 +768,44 @@ class TypedRegexValidatorTest extends ConstraintValidatorTestCase
         yield ['>'];
         yield ['|'];
         yield [' '];
+    }
+
+    /**
+     * @return Generator
+     */
+    public function getInvalidZipCodeFormats(): Generator
+    {
+        yield ['A'];
+        yield ['NNA'];
+        yield ['1QER'];
+        yield ['123QDQ'];
+        yield ['LA'];
+        yield ['£'];
+        yield ['!'];
+        yield ['@'];
+        yield ['$'];
+        yield ['%s'];
+        yield ['^'];
+        yield ['&'];
+        yield ['*'];
+        yield ['('];
+        yield [')'];
+        yield ['+'];
+        yield ['='];
+        yield ['{'];
+        yield ['}'];
+        yield ['['];
+        yield ['['];
+        yield ['<'];
+        yield ['>'];
+        yield ['?'];
+        yield ['/'];
+        yield ['\\'];
+        yield ['\''];
+        yield [';'];
+        yield [':'];
+        yield ['.'];
+        yield [','];
     }
 
     /**
