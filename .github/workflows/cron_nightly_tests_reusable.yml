@@ -101,6 +101,12 @@ jobs:
           - 'modules:30-39'
           - 'regression'
         exclude:
+          - BRANCH: 9.2.x
+            CAMPAIGN: 'sanity:productV2'
+          - BRANCH: 9.2.x
+            CAMPAIGN: 'functional:productV2'
+          - BRANCH: 9.2.x
+            CAMPAIGN: 'modules'
           ## 8.2.x
           - BRANCH: 8.2.x
             CAMPAIGN: 'audit'
